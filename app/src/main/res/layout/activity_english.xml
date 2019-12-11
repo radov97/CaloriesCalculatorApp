@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FF0B233B"
+    tools:context=".english">
+
+    <EditText
+        android:id="@+id/insert_kg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:hint=" Please insert your weight (kg)...">
+    </EditText>
+
+    <RadioGroup
+        android:id="@+id/language"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_edittext">
+
+        <RadioButton
+            android:id="@+id/sedentar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sedentary"
+            android:textAllCaps="true"
+            android:layout_margin="10dp"/>
+
+        <RadioButton
+            android:id="@+id/activ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active"
+            android:layout_margin="10dp"
+            android:textAllCaps="true"/>
+
+        <RadioButton
+            android:id="@+id/foarte_activ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Very Active"
+            android:layout_margin="10dp"
+            android:textAllCaps="true"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/calculateBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Calculate"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:textColor="#FF0B233B"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:background="@drawable/rounded_edittext"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="Weigth losing: "
+            android:textColor="#FFC6D8EB"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:background="#FF0B233B"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="27.3"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_edittext">
+
+            <TextView
+                android:id="@+id/pierdCal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Calories: "
+                android:textColor="#FFFD4949"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+            <TextView
+                android:id="@+id/pierdProt"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Proteins: "
+                android:textColor="#FFFD4949"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:id="@+id/pierdCarb"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Carbs: "
+                android:textColor="#FFFD4949"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:id="@+id/pierdGrasimi"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Fat: "
+                android:textColor="#FFFD4949"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="Weigth maintaining: "
+            android:textColor="#FFC6D8EB"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:background="#FF0B233B"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="27.3"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_edittext">
+
+            <TextView
+                android:id="@+id/mentinCal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Calories: "
+                android:textColor="#E0AA08"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+            <TextView
+                android:id="@+id/mentinProt"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Proteins: "
+                android:textColor="#E0AA08"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:id="@+id/mentinCarb"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Carbs: "
+                android:textColor="#E0AA08"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:id="@+id/mentinGrasimi"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Fat: "
+                android:textColor="#E0AA08"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="Weight gaining: "
+            android:textColor="#FFC6D8EB"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:background="#FF0B233B"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="27.3"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_edittext">
+
+            <TextView
+                android:id="@+id/crescCal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Calories: "
+                android:textColor="#4CAF50"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+            <TextView
+                android:id="@+id/crescProt"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Proteins: "
+                android:textColor="#4CAF50"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:id="@+id/crescCarb"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Carbs: "
+                android:textColor="#4CAF50"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            <TextView
+                android:id="@+id/crescGrasimi"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="70dp"
+                android:text="Fat: "
+                android:textColor="#4CAF50"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>
