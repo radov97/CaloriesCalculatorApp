@@ -14,30 +14,15 @@ import android.widget.Toast;
 public class english extends AppCompatActivity {
 
     // Declare usable
-    EditText insert_kg;
-    RadioButton sedentarRadio;
-    RadioButton activRadio;
-    RadioButton foarte_activRadio;
-    Button calculateBtn;
-    TextView pierdCal;
-    TextView pierdProt;
-    TextView pierdCarb;
-    TextView pierdGrasimi;
-    TextView mentinCal;
-    TextView mentinProt;
-    TextView mentinCarb;
-    TextView mentinGrasimi;
-    TextView crescCal;
-    TextView crescProt;
-    TextView crescCarb;
-    TextView crescGrasimi;
+    private EditText insertKg;
+    private RadioButton sedentaryRadio, activeRadio, veryActiveRadio;
+    private Button calculateButton;
+    private TextView caloriesToLose, loseProtein, loseCarb, loseFat;        // Losing weight
+    private TextView caloriesToKeep, keepProtein, keepCarb, keepFat;    // Mentaining weight
+    private TextView caloriesToIncrease, increaseProtein, increaseCarb, increaseFat;        // Increasing weight
 
     // Declare variables
-    double greutate;
-    double kcal;
-    double proteine;
-    double grasimi;
-    double carbohidrati;
+    private double weight, kcal, protein, fat, carbs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,243 +31,227 @@ public class english extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Get usable
-        insert_kg = (EditText) findViewById(R.id.insert_kg);
-        sedentarRadio = (RadioButton) findViewById(R.id.sedentar);
-        activRadio = (RadioButton) findViewById(R.id.activ);
-        foarte_activRadio = (RadioButton) findViewById(R.id.foarte_activ);
-        calculateBtn = (Button) findViewById(R.id.calculateBtn);
+        insertKg = (EditText) findViewById(R.id.insertKg);
+        sedentaryRadio = (RadioButton) findViewById(R.id.sedentar);
+        activeRadio = (RadioButton) findViewById(R.id.activ);
+        veryActiveRadio = (RadioButton) findViewById(R.id.veryActive);
+        calculateButton = (Button) findViewById(R.id.calculateButton);
 
         // Get textviews
-        pierdCal = (TextView) findViewById(R.id.pierdCal);
-        pierdProt = (TextView) findViewById(R.id.pierdProt);
-        pierdCarb = (TextView) findViewById(R.id.pierdCarb);
-        pierdGrasimi = (TextView) findViewById(R.id.pierdGrasimi);
-        mentinCal = (TextView) findViewById(R.id.mentinCal);
-        mentinProt = (TextView) findViewById(R.id.mentinProt);
-        mentinCarb = (TextView) findViewById(R.id.mentinCarb);
-        mentinGrasimi = (TextView) findViewById(R.id.mentinGrasimi);
-        crescCal = (TextView) findViewById(R.id.crescCal);
-        crescProt = (TextView) findViewById(R.id.crescProt);
-        crescCarb = (TextView) findViewById(R.id.crescCarb);
-        crescGrasimi = (TextView) findViewById(R.id.crescGrasimi);
+        caloriesToLose = (TextView) findViewById(R.id.caloriesToLose);
+        loseProtein = (TextView) findViewById(R.id.loseProtein);
+        loseCarb = (TextView) findViewById(R.id.loseCarb);
+        loseFat = (TextView) findViewById(R.id.loseFat);
+        caloriesToKeep = (TextView) findViewById(R.id.caloriesToKeep);
+        keepProtein = (TextView) findViewById(R.id.keepProtein);
+        keepCarb = (TextView) findViewById(R.id.keepCarb);
+        keepFat = (TextView) findViewById(R.id.keepFat);
+        caloriesToIncrease = (TextView) findViewById(R.id.caloriesToIncrease);
+        increaseProtein = (TextView) findViewById(R.id.increaseProtein);
+        increaseCarb = (TextView) findViewById(R.id.increaseCarb);
+        increaseFat = (TextView) findViewById(R.id.increaseFat);
 
         //Calculate when button is pressed
-        calculateBtn.setOnClickListener(new View.OnClickListener() {
+        calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(sedentarRadio.isChecked()){
-                    pierdere_greutate_sedentar();
-                    mentinere_greutate_sedentar();
-                    crestere_greutate_sedentar();
-                }else if(activRadio.isChecked()){
-                    pierdere_greutate_activ();
-                    mentinere_greutate_activ();
-                    crestere_greutate_activ();
-                }else if(foarte_activRadio.isChecked()){
-                    pierdere_greutate_foarte_activ();
-                    mentinere_greutate_foarte_activ();
-                    crestere_greutate_foarte_activ();
-                }else if((sedentarRadio.isChecked()||activRadio.isChecked()||foarte_activRadio.isChecked()) & insert_kg.getText().length()==0){
+                if (sedentaryRadio.isChecked()) {
+                    loseWeightSedentary();
+                    keepWeightSedentary();
+                    gainWeightSedentary();
+                } else if (activeRadio.isChecked()) {
+                    loseWeightActive();
+                    keepWeightActive();
+                    gainWeightActive();
+                } else if (veryActiveRadio.isChecked()) {
+                    loseWeightVeryActive();
+                    keepWeightVeryActive();
+                    gainWeightVeryActive();
+                } else if ((sedentaryRadio.isChecked() || activeRadio.isChecked() || veryActiveRadio.isChecked()) & insertKg.getText().length() == 0)
                     Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-
-                }else{
+                else
                     Toast.makeText(getBaseContext(), "Please select your lifestyle", Toast.LENGTH_LONG).show();
-                }
             }
         });
-
-
-
     }
-
-
-
-    protected void pierdere_greutate_sedentar(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Sedentary case lose weight
+    private void loseWeightSedentary() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 14) - 500.0;
-        proteine = 1.2 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        pierdCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        pierdCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        pierdProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        pierdGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // Work out the calculus
+        kcal = (weight * 2.2 * 14) - 500.0;
+        protein = 1.2 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToLose.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        loseCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        loseProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        loseFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-
-    protected void pierdere_greutate_activ(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Active case lose weight
+    private void loseWeightActive() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 15) - 500.0;
-        proteine = 1.8 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        pierdCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        pierdCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        pierdProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        pierdGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // Work out the calculus
+        kcal = (weight * 2.2 * 15) - 500.0;
+        protein = 1.8 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToLose.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        loseCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        loseProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        loseFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-
-    protected void pierdere_greutate_foarte_activ(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Very active losing weight
+    private void loseWeightVeryActive() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 16) - 500.0;
-        proteine = 2.5 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        pierdCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        pierdCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        pierdProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        pierdGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // Work out the calculus
+        kcal = (weight * 2.2 * 16) - 500.0;
+        protein = 2.5 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToLose.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        loseCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        loseProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        loseFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-
-    protected void mentinere_greutate_sedentar(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Sedentary maintain weight
+    private void keepWeightSedentary() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 14);
-        proteine = 1.2 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        mentinCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        mentinCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        mentinProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        mentinGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // Work out calculus
+        kcal = (weight * 2.2 * 14);
+        protein = 1.2 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToKeep.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        keepCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        keepProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        keepFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-
-    protected void mentinere_greutate_activ(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Active maintain weight
+    private void keepWeightActive() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 15);
-        proteine = 1.8 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        mentinCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        mentinCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        mentinProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        mentinGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // Work out calculus
+        kcal = (weight * 2.2 * 15);
+        protein = 1.8 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToKeep.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        keepCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        keepProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        keepFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-
-    protected void mentinere_greutate_foarte_activ(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Very active maintain weight
+    private void keepWeightVeryActive() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 16);
-        proteine = 2.5 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        mentinCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        mentinCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        mentinProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        mentinGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // Work out the calculus
+        kcal = (weight * 2.2 * 16);
+        protein = 2.5 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToKeep.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        keepCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        keepProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        keepFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-
-    protected void crestere_greutate_sedentar(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Sedentary increasing weight
+    private void gainWeightSedentary() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 14) + 300.0;
-        proteine = 1.2 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        crescCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        crescCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        crescProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        crescGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // work out the calculus
+        kcal = (weight * 2.2 * 14) + 300.0;
+        protein = 1.2 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToIncrease.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        increaseCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        increaseProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        increaseFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-
-    protected void crestere_greutate_activ(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Active increasing weight
+    private void gainWeightActive() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 15) + 300.0;
-        proteine = 1.8 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        crescCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        crescCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        crescProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        crescGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // Work out the calculus
+        kcal = (weight * 2.2 * 15) + 300.0;
+        protein = 1.8 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToIncrease.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        increaseCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        increaseProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        increaseFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-    protected void crestere_greutate_foarte_activ(){
-        try
-        {
-            greutate = Double.parseDouble(insert_kg.getText().toString());
-        }
-        catch (NumberFormatException e)
-        {
+    // Very active increasing weight
+    private void gainWeightVeryActive() {
+        try {
+            weight = Double.parseDouble(insertKg.getText().toString());
+        } catch (NumberFormatException e) {
             //Here request a valid value
             Toast.makeText(getBaseContext(), "Please insert your weight", Toast.LENGTH_LONG).show();
-            insert_kg.requestFocus();
+            insertKg.requestFocus();
         }
-        kcal = (greutate * 2.2 * 16) + 300.0;
-        proteine = 2.5 * greutate;
-        grasimi = 0.3 * 2.2 * greutate;
-        carbohidrati=(kcal - (proteine * 4 + grasimi * 9) ) / 4.0;
-        crescCal.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
-        crescCarb.setText("Carbs: " + String.format("%.2f", carbohidrati) + " g");
-        crescProt.setText("Proteins: " + String.format("%.2f", proteine) + " g");
-        crescGrasimi.setText("Fat: " + String.format("%.2f", grasimi) + " g");
+        // Work out the calculus
+        kcal = (weight * 2.2 * 16) + 300.0;
+        protein = 2.5 * weight;
+        fat = 0.3 * 2.2 * weight;
+        carbs=(kcal - (protein * 4 + fat * 9) ) / 4.0;
+        // Display results
+        caloriesToIncrease.setText("Calories: " + String.format("%.2f", kcal) + " kcal");
+        increaseCarb.setText("Carbs: " + String.format("%.2f", carbs) + " g");
+        increaseProtein.setText("Proteins: " + String.format("%.2f", protein) + " g");
+        increaseFat.setText("Fat: " + String.format("%.2f", fat) + " g");
     }
-
 }

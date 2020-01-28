@@ -34,7 +34,6 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"/>
 
-
         <RadioGroup
             android:id="@+id/language"
             android:layout_width="match_parent"
@@ -77,7 +76,4 @@
         android:textColor="#FF0B233B">
 
     </Button>
-
-
-
 </LinearLayout>

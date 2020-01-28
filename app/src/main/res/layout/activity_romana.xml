@@ -9,7 +9,7 @@
     tools:context=".romana">
 
     <EditText
-        android:id="@+id/insert_kg"
+        android:id="@+id/insertKg"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/rounded_edittext"
@@ -43,7 +43,7 @@
             android:textAllCaps="true"/>
 
         <RadioButton
-            android:id="@+id/foarte_activ"
+            android:id="@+id/veryActive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Foarte Activ"
@@ -53,7 +53,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/calculateBtn"
+        android:id="@+id/calculateButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Calculează"
@@ -87,7 +87,7 @@
                 android:background="@drawable/rounded_edittext">
 
                     <TextView
-                        android:id="@+id/pierdCal"
+                        android:id="@+id/caloriesToLose"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -98,7 +98,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         />
                     <TextView
-                        android:id="@+id/pierdProt"
+                        android:id="@+id/loseProtein"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -108,7 +108,7 @@
                         android:textColor="#FFFD4949"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
                     <TextView
-                        android:id="@+id/pierdCarb"
+                        android:id="@+id/loseCarb"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -118,7 +118,7 @@
                         android:textColor="#FFFD4949"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
                     <TextView
-                        android:id="@+id/pierdGrasimi"
+                        android:id="@+id/loseFat"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -127,7 +127,6 @@
                         android:text="Grăsimi: "
                         android:textColor="#FFFD4949"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
-
             </LinearLayout>
 
         <TextView
@@ -149,7 +148,7 @@
                 android:background="@drawable/rounded_edittext">
 
                 <TextView
-                    android:id="@+id/mentinCal"
+                    android:id="@+id/caloriesToKeep"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -160,7 +159,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     />
                 <TextView
-                    android:id="@+id/mentinProt"
+                    android:id="@+id/keepProtein"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -170,7 +169,7 @@
                     android:textColor="#E0AA08"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
                 <TextView
-                    android:id="@+id/mentinCarb"
+                    android:id="@+id/keepCarb"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -180,7 +179,7 @@
                     android:textColor="#E0AA08"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
                 <TextView
-                    android:id="@+id/mentinGrasimi"
+                    android:id="@+id/keepFat"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -211,7 +210,7 @@
                 android:background="@drawable/rounded_edittext">
 
                 <TextView
-                    android:id="@+id/crescCal"
+                    android:id="@+id/caloriesToIncrease"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -222,7 +221,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     />
                 <TextView
-                    android:id="@+id/crescProt"
+                    android:id="@+id/increaseProtein"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -232,7 +231,7 @@
                     android:textColor="#4CAF50"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
                 <TextView
-                    android:id="@+id/crescCarb"
+                    android:id="@+id/increaseCarb"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -242,7 +241,7 @@
                     android:textColor="#4CAF50"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
                 <TextView
-                    android:id="@+id/crescGrasimi"
+                    android:id="@+id/increaseFat"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -253,8 +252,5 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
             </LinearLayout>
-
-
-
     </LinearLayout>
 </LinearLayout>
